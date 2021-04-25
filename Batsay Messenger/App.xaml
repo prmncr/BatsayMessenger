@@ -1,0 +1,65 @@
+﻿<Application x:Class="Batsay_Messenger.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Batsay_Messenger"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             StartupUri="Architecture/Components/Window/MainWindowView.xaml">
+    <Application.Resources>
+         <ResourceDictionary>
+            <Style x:Key="InterFonts">
+                <Setter Property="TextElement.FontFamily" Value="/Resources/Fonts/#Inter" />
+            </Style>
+
+            <Style x:Key="RobotoFont">
+                <Setter Property="TextElement.FontFamily" Value="/Resources/Fonts/#Roboto" />
+            </Style>
+
+            <SolidColorBrush x:Key="PrimaryHueLightBrush" Color="#fafafa" />
+            <SolidColorBrush x:Key="PrimaryHueLightForegroundBrush" Color="#212121" />
+            <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#fafafa" />
+            <SolidColorBrush x:Key="PrimaryHueMidForegroundBrush" Color="#212121" />
+            <SolidColorBrush x:Key="PrimaryHueDarkBrush" Color="#fafafa" />
+            <SolidColorBrush x:Key="PrimaryHueDarkForegroundBrush" Color="#212121" />
+
+            <SolidColorBrush x:Key="SecondaryHueLightBrush" Color="#768fff" />
+            <SolidColorBrush x:Key="SecondaryHueLightForegroundBrush" Color="#fafafa" />
+            <SolidColorBrush x:Key="SecondaryHueMidBrush" Color="#2962ff" />
+            <SolidColorBrush x:Key="SecondaryHueMidForegroundBrush" Color="#fafafa" />
+            <SolidColorBrush x:Key="SecondaryHueDarkBrush" Color="#0039cb" />
+            <SolidColorBrush x:Key="SecondaryHueDarkForegroundBrush" Color="#fafafa" />
+
+            <SolidColorBrush x:Key="MaterialDesignBackground" Color="#212121" />
+            <SolidColorBrush x:Key="MaterialDesignPaper" Color="#212121" />
+            <SolidColorBrush x:Key="MaterialDesignCardBackground" Color="#484848" />
+            <SolidColorBrush x:Key="MaterialDesignToolBarBackground" Color="IndianRed" />
+            <SolidColorBrush x:Key="MaterialDesignBody" Color="#fafafa" />
+            <SolidColorBrush x:Key="MaterialDesignBodyLight" Color="Violet" />
+            <SolidColorBrush x:Key="MaterialDesignColumnHeader" Color="Chartreuse" />
+            <SolidColorBrush x:Key="MaterialDesignCheckBoxOff" Color="SpringGreen" />
+            <SolidColorBrush x:Key="MaterialDesignCheckBoxDisabled" Color="Red" />
+            <SolidColorBrush x:Key="MaterialDesignTextBoxBorder" Color="#fafafa" />
+            <SolidColorBrush x:Key="MaterialDesignDivider" Color="#797979" />
+            <SolidColorBrush x:Key="MaterialDesignSelection" Color="#484848" />
+            <SolidColorBrush x:Key="MaterialDesignFlatButtonClick" Color="#fafafa" />
+            <SolidColorBrush x:Key="MaterialDesignFlatButtonRipple" Color="#fafafa" />
+            <SolidColorBrush x:Key="MaterialDesignToolTipBackground" Color="#484848" />
+            <SolidColorBrush x:Key="MaterialDesignChipBackground" Color="Silver" />
+            <SolidColorBrush x:Key="MaterialDesignSnackbarBackground" Color="ForestGreen" />
+            <SolidColorBrush x:Key="MaterialDesignSnackbarMouseOver" Color="Fuchsia" />
+            <SolidColorBrush x:Key="MaterialDesignSnackbarRipple" Color="SlateGray" />
+            <SolidColorBrush x:Key="MaterialDesignTextFieldBoxBackground" Color="Firebrick" />
+            <SolidColorBrush x:Key="MaterialDesignTextFieldBoxHoverBackground" Color="Crimson" />
+            <SolidColorBrush x:Key="MaterialDesignTextFieldBoxDisabledBackground" Color="Sienna" />
+            <SolidColorBrush x:Key="MaterialDesignTextAreaBorder" Color="#fafafa" />
+            <SolidColorBrush x:Key="MaterialDesignTextAreaInactiveBorder" Color="Magenta" />
+
+            <ResourceDictionary.MergedDictionaries>
+                <materialDesign:CustomColorTheme
+                    BaseTheme="Dark"
+                    PrimaryColor="White"
+                    SecondaryColor="Blue" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
