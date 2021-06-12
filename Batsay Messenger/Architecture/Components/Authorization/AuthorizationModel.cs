@@ -20,28 +20,31 @@ namespace Batsay_Messenger.Architecture.Components.Authorization
 			{
 				var tokens = JObject.Parse(File.ReadAllText("config")).ToObject<Dictionary<string, string>>();
 				if (tokens == null || tokens.Count == 0) return;
-				foreach (var pair in tokens)
-					_groups.Add(new AuthGroup
-					{
-						Token = pair.Key,
-						Name = pair.Value
-					});
+				foreach (var (key, value) in tokens)
+					_groups.Add(new AuthGroup( key, value));
 			}
 			else
 			{
 				File.Create("config");
+				File.WriteAllLines("config", new[] {"{}"});
 			}
 		}
 
-		public ObservableCollection<AuthGroup> GetGroups() => _groups;
-
-		/// <summary>
-		/// Method for VK auth.
-		/// </summary>
-		/// <param name="token">Group token</param>
-		/// <returns>If auth completed successfully, returns null, else exception</returns>
-		public async Task<Exception> AuthorizationAsync(string token)
+		public ObservableCollection<AuthGroup> GetGroups()
 		{
+			return _groups;
+		}
+
+		public async Task<bool> AuthorizeAsyncFormatter(object[] args)
+		{
+			var token = args[0] as string;
+			var needValidation = (bool)args[1];
+			return await AuthorizeAsync(token, needValidation);
+		}
+		
+		public async Task<bool> AuthorizeAsync(string token, bool needValidation)
+		{
+			if (needValidation) ValidateToken(token);
 			try
 			{
 				await Singleton.Api.AuthorizeAsync(new ApiAuthParams {AccessToken = token});
@@ -50,30 +53,22 @@ namespace Batsay_Messenger.Architecture.Components.Authorization
 				Singleton.GroupId = pubInfo.Id;
 				Singleton.GroupName = pubInfo.Name;
 				if (pubInfo.Photo50 != null) Singleton.GroupPhoto50 = pubInfo.Photo50;
-
 				if (pubInfo.Photo100 != null) Singleton.GroupPhoto100 = pubInfo.Photo100;
-
-				return null;
+				return true;
 			}
 			catch (Exception e)
 			{
-				return e;
+				throw new ArgumentException($"Invalid token.\n{e.Message}");
 			}
 		}
 
-		public async Task<Exception> AuthorizationValidation(string token)
+		private async void ValidateToken(string token)
 		{
-			if (string.IsNullOrWhiteSpace(token)) return new ArgumentException();
-			var auth = await AuthorizationAsync(token);
-
-			if (auth != null) return auth;
-			if (_groups.Any(i => i.Token == token)) return null;
-
-			_groups.Add(new AuthGroup {Token = token, Name = Singleton.GroupName});
-
-			File.WriteAllText("config",
+			if (string.IsNullOrWhiteSpace(token)) throw new ArgumentException("Token was empty.");
+			if (_groups.Any(i => i.Token == token)) return;
+			_groups.Add(new AuthGroup(token, Singleton.GroupName));
+			await File.WriteAllTextAsync("config",
 				JObject.FromObject(_groups.ToDictionary(group => group.Token, group => group.Name)).ToString());
-			return null;
 		}
 	}
 }

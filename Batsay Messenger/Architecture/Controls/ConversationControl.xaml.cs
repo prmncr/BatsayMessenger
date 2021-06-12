@@ -1,17 +1,15 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using Batsay_Messenger.Data;
-using MaterialDesignThemes.Wpf;
 
 namespace Batsay_Messenger.Architecture.Controls
 {
-	public partial class ConversationControl : UserControl
+	public partial class ConversationControl : INotifyPropertyChanged
 	{
-		public static readonly DependencyProperty ConversationNameProperty = DependencyProperty.Register("ConversationName",
-			typeof(string), typeof(ConversationControl), new PropertyMetadata(default(string)));
+		private long _shortId;
 
 		public string ConversationName
 		{
@@ -19,41 +17,46 @@ namespace Batsay_Messenger.Architecture.Controls
 			set => SetValue(ConversationNameProperty, value);
 		}
 
-		public static readonly DependencyProperty ConversationIdProperty = DependencyProperty.Register("ConversationId",
-				typeof(long), typeof(ConversationControl), new PropertyMetadata(default(long)));
-
 		public long ConversationId
 		{
-			get => (long)GetValue(ConversationIdProperty);
+			get
+			{
+				var r = (long) GetValue(ConversationIdProperty);
+				ConversationIdShort = r;
+				return r;
+			}
+
 			set => SetValue(ConversationIdProperty, value);
 		}
 
-		public static readonly DependencyProperty ConversationPhotoProperty = DependencyProperty.Register(
-			"ConversationPhoto", typeof(Brush), typeof(ConversationControl), new PropertyMetadata(default(Brush)));
+		public long ConversationIdShort
+		{
+			get => _shortId;
+			set
+			{
+				_shortId = value - value > 2_000_000_000 ? 2_000_000_000 : 0;
+				OnPropertyChanged(nameof(ConversationIdShort));
+			}
+		}
 
 		public Brush ConversationPhoto
 		{
 			get => (Brush) GetValue(ConversationPhotoProperty);
 			set => SetValue(ConversationPhotoProperty, value);
 		}
-		
-		public static readonly DependencyProperty CommandProperty = DependencyProperty.Register("Command",
-			typeof(BaseCommand), typeof(ConversationControl), new PropertyMetadata(default(BaseCommand)));
 
 		public BaseCommand Command
 		{
-			get => (BaseCommand)GetValue(CommandProperty);
+			get => (BaseCommand) GetValue(CommandProperty);
 			set => SetValue(CommandProperty, value);
 		}
-
-		public static readonly DependencyProperty CommandParameterProperty = DependencyProperty.Register("CommandParameter",
-			typeof(object), typeof(ConversationControl), new PropertyMetadata(default(object)));
 
 		public object CommandParameter
 		{
 			get => GetValue(CommandParameterProperty);
 			set => SetValue(CommandParameterProperty, value);
 		}
+
 
 		public ConversationControl()
 		{
@@ -65,23 +68,50 @@ namespace Batsay_Messenger.Architecture.Controls
 			CreateAnimations(MouseLeaveEvent, 0);
 		}
 
+		#region PropertyChanged
+
+		public event PropertyChangedEventHandler PropertyChanged;
+
+		private void OnPropertyChanged(string propertyName = "")
+		{
+			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+		}
+
+		#endregion
+
+		#region depencyProperties
+
+		public static readonly DependencyProperty ConversationNameProperty = DependencyProperty.Register(
+			"ConversationName",
+			typeof(string), typeof(ConversationControl), new PropertyMetadata(default(string)));
+
+		public static readonly DependencyProperty ConversationIdProperty = DependencyProperty.Register("ConversationId",
+			typeof(long), typeof(ConversationControl), new PropertyMetadata(default(long)));
+
+		public static readonly DependencyProperty ConversationPhotoProperty = DependencyProperty.Register(
+			"ConversationPhoto", typeof(Brush), typeof(ConversationControl), new PropertyMetadata(default(Brush)));
+
+		public static readonly DependencyProperty CommandProperty = DependencyProperty.Register("Command",
+			typeof(BaseCommand), typeof(ConversationControl), new PropertyMetadata(default(BaseCommand)));
+
+		public static readonly DependencyProperty CommandParameterProperty = DependencyProperty.Register(
+			"CommandParameter",
+			typeof(object), typeof(ConversationControl), new PropertyMetadata(default(object)));
+
+		#endregion
+
 		private void CreateAnimations(RoutedEvent e, double toValue)
 		{
 			var animation = new DoubleAnimation(toValue, new Duration(TimeSpan.FromMilliseconds(200)));
-			var storyboard = new Storyboard { Children = { animation } };
+			var storyboard = new Storyboard {Children = {animation}};
 			Storyboard.SetTargetName(animation, nameof(ActionButton));
-			Storyboard.SetTargetProperty(animation, new PropertyPath(Button.OpacityProperty));
+			Storyboard.SetTargetProperty(animation, new PropertyPath(OpacityProperty));
 
 			ConversationViewer.Triggers.Add(new EventTrigger
 			{
 				RoutedEvent = e,
-				Actions = { new BeginStoryboard { Storyboard = storyboard } }
+				Actions = {new BeginStoryboard {Storyboard = storyboard}}
 			});
-		}
-
-		private void ConversationIdTextBlock_Loaded(object sender, RoutedEventArgs e)
-		{
-			ConversationIdTextBlock.Text = ConversationPhoto == null ? (ConversationId - 2000000000).ToString() : null;
 		}
 	}
 }

@@ -15,12 +15,10 @@ namespace Batsay_Messenger.Architecture.Controls.SettingsViewer
 
 		private void Grid_MouseLeftButtonUp(object sender, RoutedEventArgs e)
 		{
-			
 		}
 
 		private void SettingsControl_Loaded(object sender, RoutedEventArgs e)
 		{
-			
 		}
 
 		private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
@@ -31,12 +29,10 @@ namespace Batsay_Messenger.Architecture.Controls.SettingsViewer
 
 		private void TopMostCheckBox_Click(object sender, RoutedEventArgs e)
 		{
-			
 		}
 
 		private void WindowHeaderCheckBox_Click(object sender, RoutedEventArgs e)
 		{
-			
 		}
 	}
 }

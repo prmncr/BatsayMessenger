@@ -1,31 +1,18 @@
-﻿using System;
-using Batsay_Messenger.Architecture.Controls;
+﻿using System.Reflection;
 using Batsay_Messenger.Data;
 
 namespace Batsay_Messenger.Architecture.Components.Window
 {
 	public partial class MainWindowView
 	{
-		private static MainWindowViewModel _viewModel;
-
-		public IAppScreen CurrentScreen
-		{
-			get => _viewModel.CurrentContent;
-			set => _viewModel.CurrentContent = value;
-		}
-
+		private static MainWindowView _instance;
+		
 		public MainWindowView()
 		{
-			Singleton.MainViewInstance = this;
+			typeof(Singleton).GetField("_viewInstance", BindingFlags.NonPublic | BindingFlags.Static)?.SetValue(null, this);
 			InitializeComponent();
-			_viewModel = (MainWindowViewModel) DataContext;
-			Singleton.MainWindowViewModelInstance = (MainWindowViewModel) DataContext;
-		}
-
-		public IOverlayControl OverlayContent
-		{
-			get => _viewModel.OverlayContent;
-			set => _viewModel.OverlayContent = value;
+			typeof(Singleton).GetField("_viewModelInstance", BindingFlags.NonPublic | BindingFlags.Static)
+				?.SetValue(null, DataContext as MainWindowViewModel);
 		}
 	}
 }

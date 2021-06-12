@@ -7,7 +7,7 @@
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="clr-namespace:Batsay_Messenger.Architecture.Controls"
-    xmlns:messenger="clr-namespace:Batsay_Messenger.Architecture.Components.Messenger" 
+    xmlns:messenger="clr-namespace:Batsay_Messenger.Architecture.Components.Messenger"
     d:DataContext="{d:DesignInstance Type=messenger:MessengerViewModel}"
     d:DesignHeight="500"
     d:DesignWidth="800"
@@ -79,12 +79,13 @@
                 FontSize="12"
                 MaxLength="10"
                 materialDesign:TextFieldAssist.HasClearButton="True"
-                Style="{StaticResource MaterialDesignOutlinedTextBox}" Foreground="{DynamicResource SecondaryHueMidForegroundBrush}" Padding="10">
+                Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                Foreground="{DynamicResource SecondaryHueMidForegroundBrush}" Padding="10">
                 <TextBox.InputBindings>
                     <KeyBinding
                         Key="Return"
                         Command="{Binding SearchConversationCommand}"
-                        CommandParameter="{Binding ElementName=SearchConversationTextBox, Path=Text}"/>
+                        CommandParameter="{Binding ElementName=SearchConversationTextBox, Path=Text}" />
                 </TextBox.InputBindings>
             </TextBox>
             <ScrollViewer
@@ -188,7 +189,7 @@
                     <TextBox.InputBindings>
                         <KeyBinding
                             Key="Return"
-                            Command="{Binding SendMessageCommand}"/>
+                            Command="{Binding SendMessageCommand}" />
                     </TextBox.InputBindings>
                 </TextBox>
                 <Button

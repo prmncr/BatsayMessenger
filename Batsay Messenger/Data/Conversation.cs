@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -8,34 +7,23 @@ namespace Batsay_Messenger.Data
 {
 	public class Conversation
 	{
-		public readonly VkNet.Model.Conversation Data;
-		public readonly HashSet<long> MembersHash = new();
-
-		public string Title => _title; 
-		public long Id => _id;
-		public Brush Photo => _photo;
-		public ObservableCollection<Message> Messages => _messages;
-		public Dictionary<long, Member> Members => _members;
-
-		private readonly string _title;
-		private readonly long _id;
-		private readonly Brush _photo;
-		private readonly ObservableCollection<Message> _messages = new();
-		private readonly Dictionary<long, Member> _members;
-
+		public VkNet.Model.Conversation Data { get; }
+		public string Title { get; }
+		public long Id { get; }
+		public Brush Photo { get; }
+		public ObservableCollection<Message> Messages { get; } = new();
+		public Dictionary<long, Member> Members { get; }
+		
 		public Conversation(long id, VkNet.Model.Conversation conversationData = null,
 			Dictionary<long, Member> members = null)
 		{
 			Data = conversationData;
-			_id = id;
-			_title = Data != null ? Data.ChatSettings.Title : _id.ToString();
-			_photo = Data != null
+			Id = id;
+			Title = Data != null ? Data.ChatSettings.Title : Id.ToString();
+			Photo = Data != null
 				? new ImageBrush(new BitmapImage(Data.ChatSettings.Photo.Photo100))
-				: new SolidColorBrush(_id.ConvertToRgb());
-			_members = members;
-			if (members == null) return;
-			foreach (var member in  members)
-				MembersHash.Add(member.Key);
+				: new SolidColorBrush(Id.ConvertToRgb());
+			Members = members ?? new Dictionary<long, Member>();
 		}
 	}
 }

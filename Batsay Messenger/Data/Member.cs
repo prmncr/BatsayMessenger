@@ -4,19 +4,17 @@ namespace Batsay_Messenger.Data
 {
 	public abstract class Member
 	{
-		public string Name => _name;
-		public Uri PhotoUri => _photoUri;
-		public long Id => _id;
-
-		private readonly string _name;
-		private readonly Uri _photoUri;
-		private readonly long _id;
-
 		protected Member(long id, string name, Uri photoUri)
 		{
-			_id = id;
-			_photoUri = photoUri;
-			_name = name;
+			Id = id;
+			PhotoUri = photoUri;
+			Name = name;
 		}
+
+		public string Name { get; }
+
+		public Uri PhotoUri { get; }
+
+		public long Id { get; }
 	}
 }

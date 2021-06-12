@@ -90,8 +90,10 @@
             Foreground="{DynamicResource PrimaryHueMidBrush}"
             TextAlignment="Center"
             TextWrapping="Wrap">
-            If you want more info, please check<Hyperlink NavigateUri="https://vk.com/bacay99" RequestNavigate="Hyperlink_RequestNavigate">our VK public</Hyperlink>
-            .</TextBlock>
+            If you want more info, please check
+            <Hyperlink NavigateUri="https://vk.com/bacay99" RequestNavigate="Hyperlink_RequestNavigate">our VK public</Hyperlink>
+            .
+        </TextBlock>
         <Button
             x:Name="BackToSettingsButton"
             Grid.Row="4"

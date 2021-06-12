@@ -10,9 +10,7 @@ namespace Batsay_Messenger.Architecture.Components.Window
 {
 	public class MainWindowViewModel : BaseViewModel
 	{
-		#region Private variables
-
-		private IAppScreen _currentContent;
+		private IAppScreen _currentScreen;
 		private IOverlayControl _overlayContent;
 		private bool _overlayVisibility;
 		private bool _isLoadingVisible;
@@ -20,14 +18,24 @@ namespace Batsay_Messenger.Architecture.Components.Window
 		private BaseCommand _maximizeCommand;
 		private BaseCommand _closeCommand;
 		private PackIconKind _maximizeButtonIcon = PackIconKind.WindowMaximize;
-		private Thickness _borderPadding = new Thickness(0);
-
-		#endregion
+		private Thickness _borderPadding = new(0);
+		
+		public MainWindowViewModel()
+		{
+			CurrentScreen = new AuthorizationView();
+			Singleton.ViewInstance.StateChanged += (sender, args) =>
+			{
+				MaximizeButtonIcon = Singleton.ViewInstance.WindowState == WindowState.Normal
+					? PackIconKind.WindowMaximize
+					: PackIconKind.WindowRestore;
+				BorderPadding = new Thickness(Singleton.ViewInstance.WindowState == WindowState.Maximized ? 5 : 0);
+			};
+		}
 
 		public string Title => "Ba" + (new Random().NextDouble() < 0.01 ? "c" : "ts") + "ay Messenger";
 
 		/// <summary>
-		/// Uses for fixing WindowChrome paddings
+		///     Uses for fixing WindowChrome paddings
 		/// </summary>
 		public Thickness BorderPadding
 		{
@@ -38,14 +46,14 @@ namespace Batsay_Messenger.Architecture.Components.Window
 				OnPropertyChanged(nameof(BorderPadding));
 			}
 		}
-		
-		public IAppScreen CurrentContent
+
+		public IAppScreen CurrentScreen
 		{
-			get => _currentContent;
+			get => _currentScreen;
 			set
 			{
-				_currentContent = value;
-				OnPropertyChanged(nameof(CurrentContent));
+				_currentScreen = value;
+				OnPropertyChanged(nameof(CurrentScreen));
 			}
 		}
 
@@ -116,19 +124,7 @@ namespace Batsay_Messenger.Architecture.Components.Window
 			SystemCommands.CloseWindow(window);
 		});
 
-		public MainWindowViewModel()
-		{
-			CurrentContent = new AuthorizationView();
-			Singleton.MainViewInstance.StateChanged += (sender, args) =>
-			{
-				MaximizeButtonIcon = Singleton.MainViewInstance.WindowState == WindowState.Normal
-					? PackIconKind.WindowMaximize
-					: PackIconKind.WindowRestore;
-				BorderPadding = new Thickness(Singleton.MainViewInstance.WindowState == WindowState.Maximized ? 5 : 0);
-			};
-		}
-
-		public async Task<TOut> ExecuteAsync<T, TOut>(Func<T, Task<TOut>> func, T args)
+		public async Task<TOut> ExecuteAsync<T, TOut>(Func<T[], Task<TOut>> func, T[] args)
 		{
 			IsLoadingVisible = true;
 			var answer = await func(args);

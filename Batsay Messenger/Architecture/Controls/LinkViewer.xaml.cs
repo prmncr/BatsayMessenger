@@ -1,5 +1,4 @@
 ﻿using System.Windows.Controls;
-using Batsay_Messenger.Architecture.Components.Window;
 
 namespace Batsay_Messenger.Architecture.Controls
 {

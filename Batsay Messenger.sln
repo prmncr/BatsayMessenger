@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31112.23
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Batsay Messenger", "Batsay Messenger\Batsay Messenger.csproj", "{927DB1F5-FE26-47B2-881D-64A293752A05}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Batsay Messenger", "Batsay Messenger\Batsay Messenger.csproj", "{927DB1F5-FE26-47B2-881D-64A293752A05}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
