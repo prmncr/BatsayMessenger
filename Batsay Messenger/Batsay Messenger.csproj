@@ -3,18 +3,47 @@
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net5.0-windows</TargetFramework>
-    <RootNamespace>Batsay_Messenger</RootNamespace>
+    <RootNamespace>BatsayMessenger</RootNamespace>
     <UseWPF>true</UseWPF>
     <ApplicationIcon>Resources\MainWindowIcon.ico</ApplicationIcon>
     <Authors>ncrmncr</Authors>
     <NeutralLanguage>en-US</NeutralLanguage>
+    <AssemblyName>BatsayMessenger</AssemblyName>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\artem_art.png" />
+    <None Remove="Resources\artem_full.png" />
+    <None Remove="Resources\Fonts\Commissioner.ttf" />
+    <None Remove="Resources\Fonts\Inter.ttf" />
+    <None Remove="Resources\Fonts\Jost.ttf" />
+    <None Remove="Resources\Fonts\Rubik.ttf" />
+    <None Remove="Resources\MainWindowIcon.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\.editorconfig" Link=".editorconfig" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="MaterialDesignColors" Version="2.0.0" />
     <PackageReference Include="MaterialDesignThemes" Version="4.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="VkNet" Version="1.62.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MVVMBase\MVVMBase.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\artem_art.png" />
+    <Resource Include="Resources\artem_full.png" />
+    <Resource Include="Resources\Fonts\Commissioner.ttf" />
+    <Resource Include="Resources\Fonts\Inter.ttf" />
+    <Resource Include="Resources\Fonts\Jost.ttf" />
+    <Resource Include="Resources\Fonts\Rubik.ttf" />
+    <Resource Include="Resources\MainWindowIcon.ico" />
   </ItemGroup>
 
   <ItemGroup>

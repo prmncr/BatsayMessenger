@@ -1,6 +1,6 @@
-﻿using Batsay_Messenger.Data;
+﻿using MVVMBase;
 
-namespace Batsay_Messenger.Architecture.Controls.SettingsViewer
+namespace BatsayMessenger.Architecture.Controls.SettingsViewer
 {
 	public class SettingsControlViewModel : BaseViewModel
 	{

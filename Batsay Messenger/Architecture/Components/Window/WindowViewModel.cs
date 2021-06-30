@@ -1,41 +1,46 @@
 ﻿using System;
 using System.Threading.Tasks;
 using System.Windows;
-using Batsay_Messenger.Architecture.Components.Authorization;
-using Batsay_Messenger.Architecture.Controls;
-using Batsay_Messenger.Data;
+using BatsayMessenger.Architecture.Components.Auth;
+using BatsayMessenger.Architecture.Controls;
 using MaterialDesignThemes.Wpf;
+using MVVMBase;
 
-namespace Batsay_Messenger.Architecture.Components.Window
+namespace BatsayMessenger.Architecture.Components.Window
 {
-	public class MainWindowViewModel : BaseViewModel
+	public class WindowViewModel : BaseViewModel
 	{
+		private static WindowViewModel _instance;
+		private Thickness _borderPadding = new(0);
+		private BaseCommand _closeCommand;
+		private BaseCommand _closeOverlay;
 		private IAppScreen _currentScreen;
+		private bool _isLoadingVisible;
+		private PackIconKind _maximizeButtonIcon = PackIconKind.WindowMaximize;
+		private BaseCommand _maximizeCommand;
+		private BaseCommand _minimizeCommand;
 		private IOverlayControl _overlayContent;
 		private bool _overlayVisibility;
-		private bool _isLoadingVisible;
-		private BaseCommand _minimizeCommand;
-		private BaseCommand _maximizeCommand;
-		private BaseCommand _closeCommand;
-		private PackIconKind _maximizeButtonIcon = PackIconKind.WindowMaximize;
-		private Thickness _borderPadding = new(0);
-		
-		public MainWindowViewModel()
+
+		private WindowViewModel()
 		{
-			CurrentScreen = new AuthorizationView();
-			Singleton.ViewInstance.StateChanged += (sender, args) =>
+			CurrentScreen = new AuthView();
+			WindowView.Instance.StateChanged += (_, _) =>
 			{
-				MaximizeButtonIcon = Singleton.ViewInstance.WindowState == WindowState.Normal
+				MaximizeButtonIcon = WindowView.Instance.WindowState == WindowState.Normal
 					? PackIconKind.WindowMaximize
 					: PackIconKind.WindowRestore;
-				BorderPadding = new Thickness(Singleton.ViewInstance.WindowState == WindowState.Maximized ? 5 : 0);
+				BorderPadding = new Thickness(WindowView.Instance.WindowState == WindowState.Maximized ? 7 : 0);
 			};
+			_instance = this;
 		}
 
-		public string Title => "Ba" + (new Random().NextDouble() < 0.01 ? "c" : "ts") + "ay Messenger";
+		public static WindowViewModel Instance => _instance ??= new WindowViewModel();
+
+		public static string Title => "Ba" + (new Random().NextDouble() < 0.01 ? "c" : "ts") + "ay Messenger";
 
 		/// <summary>
-		///     Uses for fixing WindowChrome paddings
+		///     Uses for fixing WindowChrome's fullscreen paddings
 		/// </summary>
 		public Thickness BorderPadding
 		{
@@ -119,23 +124,26 @@ namespace Batsay_Messenger.Architecture.Components.Window
 		{
 			if (obj == null) return;
 			var window = (System.Windows.Window) obj;
-			if (Singleton.Api.IsAuthorized)
-				Singleton.Api.LogOut();
+			if (VkClasses.Data.Api.IsAuthorized)
+				VkClasses.Data.Api.LogOut();
 			SystemCommands.CloseWindow(window);
 		});
 
-		public async Task<TOut> ExecuteAsync<T, TOut>(Func<T[], Task<TOut>> func, T[] args)
+		public BaseCommand CloseOverlay => _closeOverlay ??= new BaseCommand(_ => OverlayContent = null);
+
+		public async Task<TOut> ExecuteAsync<TOut>(Func<Task<TOut>> func)
 		{
 			IsLoadingVisible = true;
-			var answer = await func(args);
+			var task = await func();
 			IsLoadingVisible = false;
-			return answer;
+			return task;
 		}
 
-		public void ExecuteAsync(Action action)
+		public async Task ExecuteAsync(Func<Task> func)
 		{
 			IsLoadingVisible = true;
-			Task.Run(action).ContinueWith(new Action<Task>(_ => IsLoadingVisible = false));
+			await func();
+			IsLoadingVisible = false;
 		}
 	}
 }

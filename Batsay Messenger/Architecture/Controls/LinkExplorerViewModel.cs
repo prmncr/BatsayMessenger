@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Windows.Threading;
-using Batsay_Messenger.Data;
-using Batsay_Messenger.Properties;
+using BatsayMessenger.Architecture.Components.Window;
+using BatsayMessenger.Properties;
+using MVVMBase;
 
-namespace Batsay_Messenger.Architecture.Controls
+namespace BatsayMessenger.Architecture.Controls
 {
 	internal class LinkExplorerViewModel : BaseViewModel
 	{
@@ -66,7 +67,7 @@ namespace Batsay_Messenger.Architecture.Controls
 			Process.Start(Url);
 			_timer.Stop();
 			DismissButtonProgress = 0;
-			Singleton.ViewModelInstance.OverlayContent = null;
+			WindowViewModel.Instance.OverlayContent = null;
 		});
 
 		public BaseCommand OpenLinkAndDoNotRemind => _openLinkR ??= new BaseCommand(_ =>
@@ -76,14 +77,14 @@ namespace Batsay_Messenger.Architecture.Controls
 			DismissButtonProgress = 0;
 			Settings.Default.OpenLinkExplorer = false;
 			Settings.Default.Save();
-			Singleton.ViewModelInstance.OverlayContent = null;
+			WindowViewModel.Instance.OverlayContent = null;
 		});
 
 		public BaseCommand DoNotOpenLink => _doNotOpenLink ??= new BaseCommand(_ =>
 		{
 			_timer.Stop();
 			DismissButtonProgress = 0;
-			Singleton.ViewModelInstance.OverlayContent = null;
+			WindowViewModel.Instance.OverlayContent = null;
 		});
 
 		private void TimerOnTick(object sender, EventArgs e)
@@ -96,7 +97,7 @@ namespace Batsay_Messenger.Architecture.Controls
 			if (Math.Abs(DismissButtonProgress - 100) > 0.1) return;
 			Process.Start(Url);
 			_timer.Stop();
-			Singleton.ViewModelInstance.OverlayContent = null;
+			WindowViewModel.Instance.OverlayContent = null;
 		}
 	}
 }

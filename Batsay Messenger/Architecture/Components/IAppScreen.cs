@@ -1,7 +1,6 @@
-﻿namespace Batsay_Messenger.Architecture.Components
+﻿namespace BatsayMessenger.Architecture.Components
 {
 	public interface IAppScreen
 	{
-		
 	}
 }

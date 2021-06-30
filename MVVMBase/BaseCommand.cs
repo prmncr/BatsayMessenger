@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace Batsay_Messenger.Data
+namespace MVVMBase
 {
 	public class BaseCommand : ICommand
 	{

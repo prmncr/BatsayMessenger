@@ -1,8 +1,6 @@
-﻿using System.Windows.Controls;
-
-namespace Batsay_Messenger.Architecture.Controls
+﻿namespace BatsayMessenger.Architecture.Controls
 {
-	public partial class LinkViewer : UserControl, IOverlayControl
+	public partial class LinkViewer : IOverlayControl
 	{
 		public LinkViewer(long url)
 		{

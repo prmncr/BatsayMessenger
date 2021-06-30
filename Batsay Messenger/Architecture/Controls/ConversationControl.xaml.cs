@@ -3,13 +3,24 @@ using System.ComponentModel;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
-using Batsay_Messenger.Data;
+using MVVMBase;
 
-namespace Batsay_Messenger.Architecture.Controls
+namespace BatsayMessenger.Architecture.Controls
 {
 	public partial class ConversationControl : INotifyPropertyChanged
 	{
 		private long _shortId;
+
+
+		public ConversationControl()
+		{
+			InitializeComponent();
+			ActionButton.Opacity = 0;
+			RegisterName(ActionButton.Name, ActionButton);
+
+			CreateAnimations(MouseEnterEvent, 1);
+			CreateAnimations(MouseLeaveEvent, 0);
+		}
 
 		public string ConversationName
 		{
@@ -57,15 +68,18 @@ namespace Batsay_Messenger.Architecture.Controls
 			set => SetValue(CommandParameterProperty, value);
 		}
 
-
-		public ConversationControl()
+		private void CreateAnimations(RoutedEvent e, double toValue)
 		{
-			InitializeComponent();
-			ActionButton.Opacity = 0;
-			RegisterName(ActionButton.Name, ActionButton);
+			var animation = new DoubleAnimation(toValue, new Duration(TimeSpan.FromMilliseconds(200)));
+			var storyboard = new Storyboard { Children = { animation } };
+			Storyboard.SetTargetName(animation, nameof(ActionButton));
+			Storyboard.SetTargetProperty(animation, new PropertyPath(OpacityProperty));
 
-			CreateAnimations(MouseEnterEvent, 1);
-			CreateAnimations(MouseLeaveEvent, 0);
+			ConversationViewer.Triggers.Add(new EventTrigger
+			{
+				RoutedEvent = e,
+				Actions = { new BeginStoryboard { Storyboard = storyboard } }
+			});
 		}
 
 		#region PropertyChanged
@@ -99,19 +113,5 @@ namespace Batsay_Messenger.Architecture.Controls
 			typeof(object), typeof(ConversationControl), new PropertyMetadata(default(object)));
 
 		#endregion
-
-		private void CreateAnimations(RoutedEvent e, double toValue)
-		{
-			var animation = new DoubleAnimation(toValue, new Duration(TimeSpan.FromMilliseconds(200)));
-			var storyboard = new Storyboard {Children = {animation}};
-			Storyboard.SetTargetName(animation, nameof(ActionButton));
-			Storyboard.SetTargetProperty(animation, new PropertyPath(OpacityProperty));
-
-			ConversationViewer.Triggers.Add(new EventTrigger
-			{
-				RoutedEvent = e,
-				Actions = {new BeginStoryboard {Storyboard = storyboard}}
-			});
-		}
 	}
 }

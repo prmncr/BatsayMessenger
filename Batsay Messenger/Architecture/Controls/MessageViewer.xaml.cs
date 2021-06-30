@@ -1,9 +1,8 @@
-﻿using System.Windows.Controls;
-using VkNet.Model;
+﻿using VkNet.Model;
 
-namespace Batsay_Messenger.Architecture.Controls
+namespace BatsayMessenger.Architecture.Controls
 {
-	public partial class MessageViewer : UserControl
+	public partial class MessageViewer
 	{
 		public MessageViewer()
 		{

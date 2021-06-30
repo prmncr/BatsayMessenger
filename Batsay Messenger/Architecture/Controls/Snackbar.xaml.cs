@@ -1,10 +1,9 @@
 ﻿using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Media;
 
-namespace Batsay_Messenger.Architecture.Controls
+namespace BatsayMessenger.Architecture.Controls
 {
-	public partial class Snackbar : UserControl
+	public partial class Snackbar
 	{
 		public Snackbar(bool isError)
 		{

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Batsay_Messenger.Data
+namespace BatsayMessenger.VkClasses
 {
 	public abstract class Member
 	{

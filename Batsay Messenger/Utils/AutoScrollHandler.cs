@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 
-namespace Batsay_Messenger.Data
+namespace BatsayMessenger.Utils
 {
 	internal class AutoScrollHandler : DependencyObject, IDisposable
 	{
@@ -23,10 +23,7 @@ namespace Batsay_Messenger.Data
 
 		private void ScrollChanged(object sender, ScrollChangedEventArgs e)
 		{
-			// User scroll event : set or unset autoscroll mode
 			if (e.ExtentHeightChange == 0) _doScroll = _scrollViewer.VerticalOffset == _scrollViewer.ScrollableHeight;
-
-			// Content scroll event : autoscroll eventually
 			if (_doScroll && e.ExtentHeightChange != 0)
 				_scrollViewer.ScrollToVerticalOffset(_scrollViewer.ExtentHeight);
 		}

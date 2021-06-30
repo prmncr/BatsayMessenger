@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Batsay_Messenger.Data
+namespace BatsayMessenger.VkClasses
 {
 	public class Group : Member
 	{

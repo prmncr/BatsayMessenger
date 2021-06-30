@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Batsay_Messenger.Properties {
+namespace BatsayMessenger.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Batsay_Messenger.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Batsay_Messenger.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("BatsayMessenger.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -73,6 +73,16 @@ namespace Batsay_Messenger.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        internal static byte[] Commissioner {
+            get {
+                object obj = ResourceManager.GetObject("Commissioner", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         internal static byte[] icon {
             get {
                 object obj = ResourceManager.GetObject("icon", resourceCulture);
@@ -86,6 +96,26 @@ namespace Batsay_Messenger.Properties {
         internal static byte[] Inter {
             get {
                 object obj = ResourceManager.GetObject("Inter", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] Jost {
+            get {
+                object obj = ResourceManager.GetObject("Jost", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] Rubik {
+            get {
+                object obj = ResourceManager.GetObject("Rubik", resourceCulture);
                 return ((byte[])(obj));
             }
         }

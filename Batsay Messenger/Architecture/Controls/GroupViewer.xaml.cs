@@ -1,15 +1,14 @@
-﻿using System.Windows.Controls;
-using Batsay_Messenger.Data;
+﻿using BatsayMessenger.Utils;
 
-namespace Batsay_Messenger.Architecture.Controls
+namespace BatsayMessenger.Architecture.Controls
 {
-	public partial class GroupViewer : UserControl, IOverlayControl
+	public partial class GroupViewer : IOverlayControl
 	{
 		public GroupViewer()
 		{
 			InitializeComponent();
-			LabelName.Text = Singleton.GroupName;
-			BorderPublicPhoto.Background = UriToBrushConverter.Convert(Singleton.GroupPhoto50);
+			LabelName.Text = VkClasses.Data.GroupName;
+			BorderPublicPhoto.Background = UriToBrushConverter.Convert(VkClasses.Data.GroupPhoto50);
 		}
 	}
 }

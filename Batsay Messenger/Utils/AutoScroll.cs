@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 
-namespace Batsay_Messenger.Data
+namespace BatsayMessenger.Utils
 {
 	internal class AutoScroll
 	{
@@ -17,7 +17,7 @@ namespace Batsay_Messenger.Data
 		private static void HookupAutoScrollToEnd(DependencyObject d,
 			DependencyPropertyChangedEventArgs e)
 		{
-			if (!(d is ScrollViewer scrollViewer)) return;
+			if (d is not ScrollViewer scrollViewer) return;
 
 			SetAutoScrollToEnd(scrollViewer, (bool) e.NewValue);
 		}

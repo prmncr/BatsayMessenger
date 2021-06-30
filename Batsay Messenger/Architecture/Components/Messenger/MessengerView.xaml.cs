@@ -1,4 +1,4 @@
-﻿namespace Batsay_Messenger.Architecture.Components.Messenger
+﻿namespace BatsayMessenger.Architecture.Components.Messenger
 {
 	public partial class MessengerView : IAppScreen
 	{

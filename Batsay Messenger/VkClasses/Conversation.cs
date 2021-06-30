@@ -2,18 +2,12 @@
 using System.Collections.ObjectModel;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using BatsayMessenger.Utils;
 
-namespace Batsay_Messenger.Data
+namespace BatsayMessenger.VkClasses
 {
 	public class Conversation
 	{
-		public VkNet.Model.Conversation Data { get; }
-		public string Title { get; }
-		public long Id { get; }
-		public Brush Photo { get; }
-		public ObservableCollection<Message> Messages { get; } = new();
-		public Dictionary<long, Member> Members { get; }
-		
 		public Conversation(long id, VkNet.Model.Conversation conversationData = null,
 			Dictionary<long, Member> members = null)
 		{
@@ -25,5 +19,12 @@ namespace Batsay_Messenger.Data
 				: new SolidColorBrush(Id.ConvertToRgb());
 			Members = members ?? new Dictionary<long, Member>();
 		}
+
+		public VkNet.Model.Conversation Data { get; }
+		public string Title { get; }
+		public long Id { get; }
+		public Brush Photo { get; }
+		public ObservableCollection<Message> Messages { get; } = new();
+		public Dictionary<long, Member> Members { get; }
 	}
 }

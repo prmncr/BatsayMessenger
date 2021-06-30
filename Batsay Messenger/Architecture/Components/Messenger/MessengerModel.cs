@@ -4,17 +4,17 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Batsay_Messenger.Data;
+using BatsayMessenger.VkClasses;
 using VkNet.Enums.SafetyEnums;
 using VkNet.Exception;
 using VkNet.Model.RequestParams;
 
-namespace Batsay_Messenger.Architecture.Components.Messenger
+namespace BatsayMessenger.Architecture.Components.Messenger
 {
 	internal class MessengerModel
 	{
 		private readonly Random _random = new();
-		private readonly Group _sender = new(Singleton.GroupId, Singleton.GroupName, Singleton.GroupPhoto50);
+		private readonly Group _sender = new(Data.GroupId, Data.GroupName, Data.GroupPhoto50);
 		private readonly CancellationToken _token;
 		private readonly CancellationTokenSource _tokenSource = new();
 
@@ -38,13 +38,13 @@ namespace Batsay_Messenger.Architecture.Components.Messenger
 				: Conversations.First(x => x.Id == selectedConversationId).Messages;
 		}
 
-		public async void SearchConversation(object obj)
+		public async Task SearchConversation(object obj)
 		{
 			if (!long.TryParse(obj.ToString(), out var id)) return;
 			if (id < 2_000_000_000) return;
 			try
 			{
-				var response = await Singleton.Api.Messages.GetConversationsByIdAsync(new[] {id});
+				var response = await Data.Api.Messages.GetConversationsByIdAsync(new[] {id});
 				if (response.Items.Any())
 				{
 					var conversation = response.Items.First();
@@ -63,18 +63,18 @@ namespace Batsay_Messenger.Architecture.Components.Messenger
 			}
 		}
 
-		private Conversation LoadConversationInfo(long id)
+		private async Task<Conversation> LoadConversationInfo(long id)
 		{
-			var response = Singleton.Api.Messages.GetConversationsByIdAsync(new[] {id});
-			var conversationData = response.Result.Items.FirstOrDefault();
+			var response = await Data.Api.Messages.GetConversationsByIdAsync(new[] {id});
+			var conversationData = response.Items.FirstOrDefault();
 			Conversation conversation;
 			if (conversationData != null)
 			{
-				var membersResponse = Singleton.Api.Messages.GetConversationMembersAsync(id);
-				var members = membersResponse.Result.Profiles.ToDictionary(user => user.Id,
+				var membersResponse = await Data.Api.Messages.GetConversationMembersAsync(id);
+				var members = membersResponse.Profiles.ToDictionary(user => user.Id,
 					user => new User(user.Id, user.FirstName, user.LastName, user.Photo50) as Member);
 
-				foreach (var group in membersResponse.Result.Groups)
+				foreach (var group in membersResponse.Groups)
 					members.Add(-group.Id, new Group(group.Id, group.Name, group.Photo50));
 
 				conversation = new Conversation(id, conversationData, members);
@@ -94,7 +94,7 @@ namespace Batsay_Messenger.Architecture.Components.Messenger
 
 		public async void SendMessage(string text, long id)
 		{
-			await Singleton.Api.Messages.SendAsync(new MessagesSendParams
+			await Data.Api.Messages.SendAsync(new MessagesSendParams
 			{
 				PeerId = id,
 				Message = text,
@@ -114,22 +114,21 @@ namespace Batsay_Messenger.Architecture.Components.Messenger
 
 		private void LongPoll(IProgress<VkNet.Model.Message> progress)
 		{
-			var response = Singleton.Api.Groups.GetLongPollServer((ulong) Singleton.GroupId);
+			var response = Data.Api.Groups.GetLongPollServer((ulong) Data.GroupId);
 			var ts = response.Ts;
 			while (!_token.IsCancellationRequested)
 			{
-				var poll = Singleton.Api.Groups.GetBotsLongPollHistory(new BotsLongPollHistoryParams
+				var poll = Data.Api.Groups.GetBotsLongPollHistory(new BotsLongPollHistoryParams
 					{Server = response.Server, Ts = ts, Key = response.Key, Wait = 25});
 				if (poll?.Updates == null) continue;
-				foreach (var groupUpdate in poll.Updates)
-					if (groupUpdate.Type == GroupUpdateType.MessageNew ||
-					    groupUpdate.Type == GroupUpdateType.MessageReply)
-						progress.Report(groupUpdate.MessageNew.Message);
+				foreach (var update in poll.Updates)
+					if (update.Type == GroupUpdateType.MessageNew || update.Type == GroupUpdateType.MessageReply)
+						progress.Report(update.MessageNew.Message);
 				ts = poll.Ts;
 			}
 		}
 
-		private void ReceiveMessage(VkNet.Model.Message message)
+		private async void ReceiveMessage(VkNet.Model.Message message)
 		{
 			var conversationId = message.PeerId!.Value;
 			var senderId = message.FromId!.Value;
@@ -137,7 +136,7 @@ namespace Batsay_Messenger.Architecture.Components.Messenger
 			var current = Conversations.FirstOrDefault(conversation => conversation.Id == conversationId);
 			if (current == null)
 			{
-				current = LoadConversationInfo(conversationId);
+				current = await LoadConversationInfo(conversationId);
 				Conversations.Add(current);
 			}
 

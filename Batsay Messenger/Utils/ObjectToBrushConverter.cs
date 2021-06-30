@@ -1,6 +1,6 @@
 ﻿using System.Windows.Media;
 
-namespace Batsay_Messenger.Data
+namespace BatsayMessenger.Utils
 {
 	public static class ObjectToBrushConverter
 	{

@@ -1,4 +1,4 @@
-﻿namespace Batsay_Messenger.Architecture.Controls
+﻿namespace BatsayMessenger.Architecture.Controls
 {
 	public interface IOverlayControl
 	{

@@ -4,7 +4,7 @@ using System.Windows.Data;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
-namespace Batsay_Messenger.Data
+namespace BatsayMessenger.Utils
 {
 	public class UriToBrushConverter : IValueConverter
 	{
