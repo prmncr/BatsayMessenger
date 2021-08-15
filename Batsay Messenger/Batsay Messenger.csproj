@@ -9,6 +9,8 @@
     <Authors>ncrmncr</Authors>
     <NeutralLanguage>en-US</NeutralLanguage>
     <AssemblyName>BatsayMessenger</AssemblyName>
+    <RunAnalyzersDuringBuild>false</RunAnalyzersDuringBuild>
+    <EnableNETAnalyzers>false</EnableNETAnalyzers>
   </PropertyGroup>
 
   <ItemGroup>
@@ -22,18 +24,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="..\.editorconfig" Link=".editorconfig" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="MaterialDesignColors" Version="2.0.0" />
     <PackageReference Include="MaterialDesignThemes" Version="4.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="VkNet" Version="1.62.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\MVVMBase\MVVMBase.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -71,6 +65,14 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Styles" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Essentials\Essentials.csproj" />
   </ItemGroup>
 
 </Project>
