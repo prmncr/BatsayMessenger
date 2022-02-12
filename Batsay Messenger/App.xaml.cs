@@ -1,6 +1,5 @@
-﻿namespace BatsayMessenger
+﻿namespace BatsayMessenger;
+
+public partial class App
 {
-	public partial class App
-	{
-	}
 }

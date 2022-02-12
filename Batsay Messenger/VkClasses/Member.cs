@@ -1,20 +1,19 @@
 ﻿using System;
 
-namespace BatsayMessenger.VkClasses
+namespace BatsayMessenger.VkClasses;
+
+public abstract class Member
 {
-	public abstract class Member
+	protected Member(long id, string name, Uri photoUri)
 	{
-		protected Member(long id, string name, Uri photoUri)
-		{
-			Id = id;
-			PhotoUri = photoUri;
-			Name = name;
-		}
-
-		public string Name { get; }
-
-		public Uri PhotoUri { get; }
-
-		public long Id { get; }
+		Id = id;
+		PhotoUri = photoUri;
+		Name = name;
 	}
+
+	public string Name { get; }
+
+	public Uri PhotoUri { get; }
+
+	public long Id { get; }
 }

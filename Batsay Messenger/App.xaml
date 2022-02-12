@@ -1,9 +1,9 @@
 ﻿<Application
+    StartupUri="Components/Window/WindowView.xaml"
     x:Class="BatsayMessenger.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-    StartupUri="Architecture/Window/WindowView.xaml">
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Application.Resources>
         <ResourceDictionary>
             <Style x:Key="InterFonts">
@@ -22,44 +22,45 @@
                 <Setter Property="TextElement.FontFamily" Value="/Resources/Fonts/#Jost" />
             </Style>
 
-            <SolidColorBrush x:Key="PrimaryHueLightBrush" Color="#fafafa" />
-            <SolidColorBrush x:Key="PrimaryHueLightForegroundBrush" Color="#212121" />
-            <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#fafafa" />
-            <SolidColorBrush x:Key="PrimaryHueMidForegroundBrush" Color="#212121" />
-            <SolidColorBrush x:Key="PrimaryHueDarkBrush" Color="#fafafa" />
-            <SolidColorBrush x:Key="PrimaryHueDarkForegroundBrush" Color="#212121" />
+            <SolidColorBrush Color="#fafafa" x:Key="PrimaryHueLightBrush" />
+            <SolidColorBrush Color="#212121" x:Key="PrimaryHueLightForegroundBrush" />
+            <SolidColorBrush Color="#fafafa" x:Key="PrimaryHueMidBrush" />
+            <SolidColorBrush Color="#212121" x:Key="PrimaryHueMidForegroundBrush" />
+            <SolidColorBrush Color="#fafafa" x:Key="PrimaryHueDarkBrush" />
+            <SolidColorBrush Color="#212121" x:Key="PrimaryHueDarkForegroundBrush" />
+            <SolidColorBrush Color="#999999" x:Key="PrimaryHueInactiveMidBrush" />
 
-            <SolidColorBrush x:Key="SecondaryHueLightBrush" Color="#768fff" />
-            <SolidColorBrush x:Key="SecondaryHueLightForegroundBrush" Color="#fafafa" />
-            <SolidColorBrush x:Key="SecondaryHueMidBrush" Color="#2962ff" />
-            <SolidColorBrush x:Key="SecondaryHueMidForegroundBrush" Color="#fafafa" />
-            <SolidColorBrush x:Key="SecondaryHueDarkBrush" Color="#0039cb" />
-            <SolidColorBrush x:Key="SecondaryHueDarkForegroundBrush" Color="#fafafa" />
+            <SolidColorBrush Color="#768fff" x:Key="SecondaryHueLightBrush" />
+            <SolidColorBrush Color="#fafafa" x:Key="SecondaryHueLightForegroundBrush" />
+            <SolidColorBrush Color="#2962ff" x:Key="SecondaryHueMidBrush" />
+            <SolidColorBrush Color="#fafafa" x:Key="SecondaryHueMidForegroundBrush" />
+            <SolidColorBrush Color="#0039cb" x:Key="SecondaryHueDarkBrush" />
+            <SolidColorBrush Color="#fafafa" x:Key="SecondaryHueDarkForegroundBrush" />
 
-            <SolidColorBrush x:Key="MaterialDesignBackground" Color="#212121" />
-            <SolidColorBrush x:Key="MaterialDesignPaper" Color="#212121" />
-            <SolidColorBrush x:Key="MaterialDesignCardBackground" Color="#484848" />
-            <SolidColorBrush x:Key="MaterialDesignToolBarBackground" Color="IndianRed" />
-            <SolidColorBrush x:Key="MaterialDesignBody" Color="#fafafa" />
-            <SolidColorBrush x:Key="MaterialDesignBodyLight" Color="Violet" />
-            <SolidColorBrush x:Key="MaterialDesignColumnHeader" Color="Chartreuse" />
-            <SolidColorBrush x:Key="MaterialDesignCheckBoxOff" Color="SpringGreen" />
-            <SolidColorBrush x:Key="MaterialDesignCheckBoxDisabled" Color="Red" />
-            <SolidColorBrush x:Key="MaterialDesignTextBoxBorder" Color="#fafafa" />
-            <SolidColorBrush x:Key="MaterialDesignDivider" Color="#797979" />
-            <SolidColorBrush x:Key="MaterialDesignSelection" Color="#484848" />
-            <SolidColorBrush x:Key="MaterialDesignFlatButtonClick" Color="#fafafa" />
-            <SolidColorBrush x:Key="MaterialDesignFlatButtonRipple" Color="#fafafa" />
-            <SolidColorBrush x:Key="MaterialDesignToolTipBackground" Color="#484848" />
-            <SolidColorBrush x:Key="MaterialDesignChipBackground" Color="Silver" />
-            <SolidColorBrush x:Key="MaterialDesignSnackbarBackground" Color="ForestGreen" />
-            <SolidColorBrush x:Key="MaterialDesignSnackbarMouseOver" Color="Fuchsia" />
-            <SolidColorBrush x:Key="MaterialDesignSnackbarRipple" Color="SlateGray" />
-            <SolidColorBrush x:Key="MaterialDesignTextFieldBoxBackground" Color="Firebrick" />
-            <SolidColorBrush x:Key="MaterialDesignTextFieldBoxHoverBackground" Color="Crimson" />
-            <SolidColorBrush x:Key="MaterialDesignTextFieldBoxDisabledBackground" Color="Sienna" />
-            <SolidColorBrush x:Key="MaterialDesignTextAreaBorder" Color="#fafafa" />
-            <SolidColorBrush x:Key="MaterialDesignTextAreaInactiveBorder" Color="Magenta" />
+            <SolidColorBrush Color="#212121" x:Key="MaterialDesignBackground" />
+            <SolidColorBrush Color="#212121" x:Key="MaterialDesignPaper" />
+            <SolidColorBrush Color="#484848" x:Key="MaterialDesignCardBackground" />
+            <SolidColorBrush Color="IndianRed" x:Key="MaterialDesignToolBarBackground" />
+            <SolidColorBrush Color="#fafafa" x:Key="MaterialDesignBody" />
+            <SolidColorBrush Color="Violet" x:Key="MaterialDesignBodyLight" />
+            <SolidColorBrush Color="Chartreuse" x:Key="MaterialDesignColumnHeader" />
+            <SolidColorBrush Color="SpringGreen" x:Key="MaterialDesignCheckBoxOff" />
+            <SolidColorBrush Color="Red" x:Key="MaterialDesignCheckBoxDisabled" />
+            <SolidColorBrush Color="#fafafa" x:Key="MaterialDesignTextBoxBorder" />
+            <SolidColorBrush Color="#797979" x:Key="MaterialDesignDivider" />
+            <SolidColorBrush Color="#484848" x:Key="MaterialDesignSelection" />
+            <SolidColorBrush Color="#fafafa" x:Key="MaterialDesignFlatButtonClick" />
+            <SolidColorBrush Color="#fafafa" x:Key="MaterialDesignFlatButtonRipple" />
+            <SolidColorBrush Color="#484848" x:Key="MaterialDesignToolTipBackground" />
+            <SolidColorBrush Color="Silver" x:Key="MaterialDesignChipBackground" />
+            <SolidColorBrush Color="ForestGreen" x:Key="MaterialDesignSnackbarBackground" />
+            <SolidColorBrush Color="Fuchsia" x:Key="MaterialDesignSnackbarMouseOver" />
+            <SolidColorBrush Color="SlateGray" x:Key="MaterialDesignSnackbarRipple" />
+            <SolidColorBrush Color="Firebrick" x:Key="MaterialDesignTextFieldBoxBackground" />
+            <SolidColorBrush Color="Crimson" x:Key="MaterialDesignTextFieldBoxHoverBackground" />
+            <SolidColorBrush Color="Sienna" x:Key="MaterialDesignTextFieldBoxDisabledBackground" />
+            <SolidColorBrush Color="#fafafa" x:Key="MaterialDesignTextAreaBorder" />
+            <SolidColorBrush Color="Magenta" x:Key="MaterialDesignTextAreaInactiveBorder" />
 
             <ResourceDictionary.MergedDictionaries>
                 <materialDesign:CustomColorTheme

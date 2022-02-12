@@ -1,78 +1,76 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <OutputType>WinExe</OutputType>
-    <TargetFramework>net5.0-windows</TargetFramework>
-    <RootNamespace>BatsayMessenger</RootNamespace>
-    <UseWPF>true</UseWPF>
-    <ApplicationIcon>Resources\MainWindowIcon.ico</ApplicationIcon>
-    <Authors>ncrmncr</Authors>
-    <NeutralLanguage>en-US</NeutralLanguage>
-    <AssemblyName>BatsayMessenger</AssemblyName>
-    <RunAnalyzersDuringBuild>false</RunAnalyzersDuringBuild>
-    <EnableNETAnalyzers>false</EnableNETAnalyzers>
-  </PropertyGroup>
+    <PropertyGroup>
+        <OutputType>WinExe</OutputType>
+        <TargetFramework>net6.0-windows</TargetFramework>
+        <RootNamespace>BatsayMessenger</RootNamespace>
+        <UseWPF>true</UseWPF>
+        <ApplicationIcon>Resources\MainWindowIcon.ico</ApplicationIcon>
+        <Authors>ncrmncr</Authors>
+        <NeutralLanguage>en-US</NeutralLanguage>
+        <AssemblyName>BatsayMessenger</AssemblyName>
+        <RunAnalyzersDuringBuild>false</RunAnalyzersDuringBuild>
+        <EnableNETAnalyzers>false</EnableNETAnalyzers>
+        <LangVersion>default</LangVersion>
+        <Nullable>disable</Nullable>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <None Remove="Resources\artem_art.png" />
-    <None Remove="Resources\artem_full.png" />
-    <None Remove="Resources\Fonts\Commissioner.ttf" />
-    <None Remove="Resources\Fonts\Inter.ttf" />
-    <None Remove="Resources\Fonts\Jost.ttf" />
-    <None Remove="Resources\Fonts\Rubik.ttf" />
-    <None Remove="Resources\MainWindowIcon.ico" />
-  </ItemGroup>
+    <ItemGroup>
+        <None Remove="Resources\artem_art.png"/>
+        <None Remove="Resources\artem_full.png"/>
+        <None Remove="Resources\Fonts\Commissioner.ttf"/>
+        <None Remove="Resources\Fonts\Inter.ttf"/>
+        <None Remove="Resources\Fonts\Jost.ttf"/>
+        <None Remove="Resources\Fonts\Rubik.ttf"/>
+        <None Remove="Resources\MainWindowIcon.ico"/>
+    </ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="MaterialDesignColors" Version="2.0.0" />
-    <PackageReference Include="MaterialDesignThemes" Version="4.0.0" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-    <PackageReference Include="VkNet" Version="1.62.0" />
-  </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="MaterialDesignColors" Version="2.0.5-ci38-ci38"/>
+        <PackageReference Include="MaterialDesignThemes" Version="4.4.0-ci38-ci38"/>
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.1"/>
+        <PackageReference Include="VkNet" Version="1.68.0"/>
+    </ItemGroup>
 
-  <ItemGroup>
-    <Resource Include="Resources\artem_art.png" />
-    <Resource Include="Resources\artem_full.png" />
-    <Resource Include="Resources\Fonts\Commissioner.ttf" />
-    <Resource Include="Resources\Fonts\Inter.ttf" />
-    <Resource Include="Resources\Fonts\Jost.ttf" />
-    <Resource Include="Resources\Fonts\Rubik.ttf" />
-    <Resource Include="Resources\MainWindowIcon.ico" />
-  </ItemGroup>
+    <ItemGroup>
+        <Resource Include="Resources\artem_art.png"/>
+        <Resource Include="Resources\artem_full.png"/>
+        <Resource Include="Resources\Fonts\Commissioner.ttf"/>
+        <Resource Include="Resources\Fonts\Inter.ttf"/>
+        <Resource Include="Resources\Fonts\Jost.ttf"/>
+        <Resource Include="Resources\Fonts\Rubik.ttf"/>
+        <Resource Include="Resources\MainWindowIcon.ico"/>
+    </ItemGroup>
 
-  <ItemGroup>
-    <Compile Update="Properties\Resources.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-    <Compile Update="Properties\Settings.Designer.cs">
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
-    </Compile>
-  </ItemGroup>
+    <ItemGroup>
+        <Compile Update="Properties\Resources.Designer.cs">
+            <DesignTime>True</DesignTime>
+            <AutoGen>True</AutoGen>
+            <DependentUpon>Resources.resx</DependentUpon>
+        </Compile>
+        <Compile Update="Properties\Settings.Designer.cs">
+            <DesignTimeSharedInput>True</DesignTimeSharedInput>
+            <AutoGen>True</AutoGen>
+            <DependentUpon>Settings.settings</DependentUpon>
+        </Compile>
+    </ItemGroup>
 
-  <ItemGroup>
-    <EmbeddedResource Update="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-  </ItemGroup>
+    <ItemGroup>
+        <EmbeddedResource Update="Properties\Resources.resx">
+            <Generator>ResXFileCodeGenerator</Generator>
+            <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+        </EmbeddedResource>
+    </ItemGroup>
 
-  <ItemGroup>
-    <None Update="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
-  </ItemGroup>
+    <ItemGroup>
+        <None Update="Properties\Settings.settings">
+            <Generator>SettingsSingleFileGenerator</Generator>
+            <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+        </None>
+    </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Styles" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Essentials\Essentials.csproj" />
-  </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\Essentials\Essentials.csproj"/>
+    </ItemGroup>
 
 </Project>
